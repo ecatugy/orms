@@ -49,13 +49,3 @@ This layer contains all application logic. It is dependent on the domain layer, 
  This layer depends on both the Application and Infrastructure layers, however, the dependency on Infrastructure is only to support dependency injection. Therefore only *Program.cs* should reference Infrastructure.
 
 
-## Critique
-
-### If this project were to grow and have many users and posts, which parts do you think would fail first?
-
-The bottleneck will be in the bank, the project is already with the structure ready to grow if necessary, with clean architecture and the change will be in the repositories, in this case in the worst case you can use queues and distribute the api in load balance.
-
-### In a real-life situation, what steps would you take to scale this product? What other types of technology and infrastructure might you need to use?
-
-Adding more web servers through Load Balancing to the system. Multiple machines work together to give quick response and availability of any system including database. After adding multiple machines now have multiple machines to distribute the work load from time to time..
-

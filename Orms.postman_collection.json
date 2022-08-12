@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "0b534410-d2b9-46dc-be4a-9a355a38092c",
+		"name": "Poster",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14820429"
+	},
+	"item": [
+		{
+			"name": "getUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7060/api/User/getUser?id=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"User",
+						"getUser"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPosts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7060/api/Post/getAllPosts?PageNumber=1&PageSize=10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"Post",
+						"getAllPosts"
+					],
+					"query": [
+						{
+							"key": "PageNumber",
+							"value": "1"
+						},
+						{
+							"key": "PageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPostsOnlyMe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7060/api/Post/getAllPostsOnlyMe?PageNumber=1&PageSize=10&idUser=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"Post",
+						"getAllPostsOnlyMe"
+					],
+					"query": [
+						{
+							"key": "PageNumber",
+							"value": "1"
+						},
+						{
+							"key": "PageSize",
+							"value": "10"
+						},
+						{
+							"key": "idUser",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPostsByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7060/api/Post/getAllPostsByDate?PageNumber=1&PageSize=10&initial=&final=2022-07-15 11:40:11.3942241",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"Post",
+						"getAllPostsByDate"
+					],
+					"query": [
+						{
+							"key": "PageNumber",
+							"value": "1"
+						},
+						{
+							"key": "PageSize",
+							"value": "10"
+						},
+						{
+							"key": "initial",
+							"value": ""
+						},
+						{
+							"key": "final",
+							"value": "2022-07-15 11:40:11.3942241"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPostUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD/MM/YYYY HH:mm:ss\")));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": 0,\r\n  \"content\": \"content-original\",\r\n   \"dateInsert\": \"{{currentdate}}\",\r\n  \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7060/api/Post/createPost",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"Post",
+						"createPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "respost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": 1,\r\n  \"content\": \"content\",\r\n  \"comment\": \"comment-repost\",\r\n  \"dateInsert\": \"2022-07-14T15:08:11.805Z\",\r\n  \"userId\": 2,\r\n  \"postId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7060/api/Post/repost?isQuote=false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"Post",
+						"repost"
+					],
+					"query": [
+						{
+							"key": "isQuote",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": 0,\r\n  \"content\": \"string\",\r\n  \"dateInsert\": \"2022-07-14T15:08:11.805Z\",\r\n  \"userId\": 0,\r\n  \"postId\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7060/api/Post/repost?isQuote=true",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7060",
+					"path": [
+						"api",
+						"Post",
+						"repost"
+					],
+					"query": [
+						{
+							"key": "isQuote",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
